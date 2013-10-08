@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 import csv
 import sys
-import progressbar
 
 from models import Crime
 from models import db
