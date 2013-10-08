@@ -1,0 +1,8 @@
+flask
+mock
+nose
+peewee
+progressbar
+pygeocoder
+gunicorn
+psycopg2

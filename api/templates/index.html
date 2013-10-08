@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row">
+  <div class="span3">
+    <h1>Criminality</h1>
+  </div>
+  <div class="span3">
+    <button class="btn refresh"><i class="icon-refresh"></i> Reload</button>
+  </div>
+</div>
+<p class='loading hidden'>loading crime score for your location...</p>
+<div class="score-container hidden">
+  <hr />
+  <div class="row">
+    <div class="span2">
+      <small>Criminality score (lower is better):</small>
+      <h2 class='score'></h2>
+    </div>
+    <div class="span2">
+      <small>Violent Crime</small>
+      <h2 class="violent-score"></h2>
+    </div>
+    <div class="span2">
+      <small>Non-Violent Crime</small>
+      <h2 class="nonviolent-score"></h2>
+    </div>
+</div>
+<div class="recent-container hidden">
+  <hr />
+  <small>Recent crimes within 100 meters</small>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Location</th>
+        <th>Description</th>
+        <th>Distance (meters)</th>
+      </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+  </table>
+</div>
+<script type="text/javascript" src="/static/js/app.js"></script>
+<script type="text/javascript">
+$(function() {
+  window.app.init();
+})
+</script>
+{% endblock %}
