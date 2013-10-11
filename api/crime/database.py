@@ -1,7 +1,9 @@
 #!/usr/bin/env python
+import datetime
+import json
+
 from peewee import *
 from peewee import RawQuery
-import json
 
 from api import config
 
@@ -39,12 +41,18 @@ class Crime(BaseModel):
     }
 
 class Database(object):
-  def load_crimes(self, lat, lon, meters):
+  def load_crimes(self, lat, lon, meters, when=None):
+    if not when:
+      when = datetime.datetime.now()
+
+    min_date = (when - datetime.timedelta(365))
+
     return [c for c in RawQuery(Crime, """
       SELECT *, ST_Distance_Sphere(geom, ST_GeomFromText('POINT(%0.6f %0.6f)', 4326)) AS distance
       FROM crime
       WHERE ST_Distance_Sphere(geom, ST_GeomFromText('POINT(%0.6f %0.6f)', 4326)) < %d
-      """ % (lon, lat, lon, lat, meters)).execute()]
+      AND dispatch_time > '%s'
+      """ % (lon, lat, lon, lat, meters, min_date.strftime('%Y-%m-%d'))).execute()]
 
 
 if __name__ == '__main__':
