@@ -5,13 +5,13 @@ import json
 from peewee import *
 from peewee import RawQuery
 
-from api import config
+from api import app
 
 
-db = PostgresqlDatabase(config.DATABASE_NAME, 
-  user = config.DATABASE_USER,
-  password = config.DATABASE_PASS,
-  host = config.DATABASE_HOST)
+db = PostgresqlDatabase(app.config.get('DATABASE_NAME'), 
+  user = app.config.get('DATABASE_USER'),
+  password = app.config.get('DATABASE_PASS'),
+  host = app.config.get('DATABASE_HOST'))
 
 class BaseModel(Model):
   class Meta:

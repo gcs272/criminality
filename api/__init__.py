@@ -8,7 +8,7 @@ from api.crime.model import Model
 
 
 app = Flask(__name__)
-app.config.from_pyfile('config.py')
+app.config.from_envvar('CRIMINALITY_CONFIG')
 
 @app.route('/')
 def index():
